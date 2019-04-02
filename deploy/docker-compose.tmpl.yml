@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
   docker-gc:
-    image: ${IMAGE_NAME:-spotify/docker-gc}:${IMAGE_TAG:-latest}
+    image: ${IMAGE_NAME}:${IMAGE_TAG:-latest}
     environment:
       GRACE_PERIOD_SECONDS:
       MINIMUM_IMAGES_TO_SAVE:

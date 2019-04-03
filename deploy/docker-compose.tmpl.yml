@@ -11,6 +11,7 @@ services:
       DRY_RUN:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - docker-gc-vol:/var/lib/docker-gc
     configs:
       - source: exclude-gc-image
         target: /etc/docker-gc-exclude
@@ -32,6 +33,10 @@ services:
           memory: 32M
         reservations:
           memory: 16M
+
+volumes:
+  docker-gc-vol:
+    name: "${DOCKER_GC_VOL_NAME:-docker-gc-vol}"
 
 configs:
   exclude-gc-image:

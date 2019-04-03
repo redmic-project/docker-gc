@@ -2,12 +2,13 @@ version: '3.5'
 
 services:
   docker-gc:
-    image: ${IMAGE_NAME}:${IMAGE_TAG:-latest}
+    image: ${IMAGE_NAME:-spotify/docker-gc}:${IMAGE_TAG:-latest}
     environment:
       GRACE_PERIOD_SECONDS:
       MINIMUM_IMAGES_TO_SAVE:
       REMOVE_ASSOCIATED_VOLUME:
       EXCLUDE_DEAD:
+      DRY_RUN:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     configs:
@@ -28,9 +29,9 @@ services:
       resources:
         limits:
           cpus: '0.1'
-          memory: 64M
+          memory: 32M
         reservations:
-          memory: 52M
+          memory: 16M
 
 configs:
   exclude-gc-image:

@@ -2,6 +2,8 @@ stages:
   - deploy
   - maintenance
 
+image: ${DOCKER_DEPLOY_IMAGE_NAME}:${DOCKER_DEPLOY_IMAGE_TAG}
+
 services:
   - docker:dind
 
@@ -13,7 +15,6 @@ variables:
 
 deploy-supporting-branch-develop:
   stage: deploy
-  image: ${DOCKER_DEPLOY_IMAGE_NAME}:${DOCKER_DEPLOY_IMAGE_TAG}
   variables:
     SSH_REMOTE: ${DEV_SSH_REMOTE}
     COMPOSE_FILE: docker-compose.tmpl.yml:docker-compose.dev.yml
@@ -29,7 +30,6 @@ deploy-supporting-branch-develop:
 
 deploy-stable-branch-develop:
   stage: deploy
-  image: ${DOCKER_DEPLOY_IMAGE_NAME}:${DOCKER_DEPLOY_IMAGE_TAG}
   variables:
     SSH_REMOTE: ${DEV_SSH_REMOTE}
     COMPOSE_FILE: docker-compose.tmpl.yml:docker-compose.dev.yml
@@ -43,7 +43,6 @@ deploy-stable-branch-develop:
 
 deploy-supporting-branch-production:
   stage: deploy
-  image: ${DOCKER_DEPLOY_IMAGE_NAME}:${DOCKER_DEPLOY_IMAGE_TAG}
   variables:
     SSH_REMOTE: ${PRO_SSH_REMOTE}
     COMPOSE_FILE: docker-compose.tmpl.yml:docker-compose.prod.yml
@@ -59,7 +58,6 @@ deploy-supporting-branch-production:
 
 deploy-stable-branch-production:
   stage: deploy
-  image: ${DOCKER_DEPLOY_IMAGE_NAME}:${DOCKER_DEPLOY_IMAGE_TAG}
   variables:
     SSH_REMOTE: ${PRO_SSH_REMOTE}
     COMPOSE_FILE: docker-compose.tmpl.yml:docker-compose.prod.yml

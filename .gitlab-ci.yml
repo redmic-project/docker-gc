@@ -10,11 +10,7 @@ stages:
   - deploy
   - maintenance
 
-services:
-  - docker:dind
-
 variables:
-  DOCKER_DRIVER: overlay2
   STACK: maintenance
   IMAGE_NAME: spotify/docker-gc
   IMAGE_TAG: latest

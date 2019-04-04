@@ -2,6 +2,9 @@ include:
   - project: 'redmic-project/gitlab-ci-templates'
     ref: master
     file: '/deployment.yml'
+  - project: 'redmic-project/gitlab-ci-templates'
+    ref: master
+    file: '/maintenance.yml'
 
 stages:
   - deploy
@@ -13,24 +16,5 @@ services:
 variables:
   DOCKER_DRIVER: overlay2
   STACK: maintenance
-  SERVICES_TO_CHECK: maintenance_${CI_PROJECT_NAME}
   IMAGE_NAME: spotify/docker-gc
   IMAGE_TAG: latest
-
-scheduled-run-stable-branch-develop:
-  stage: maintenance
-  variables:
-    SSH_REMOTE: ${DEV_SSH_REMOTE}
-    SERVICE: ${STACK}_${CI_PROJECT_NAME}
-  script: relaunch.sh
-  only:
-    - schedules
-
-scheduled-run-stable-branch-production:
-  stage: maintenance
-  variables:
-    SSH_REMOTE: ${PRO_SSH_REMOTE}
-    SERVICE: ${STACK}_${CI_PROJECT_NAME}
-  script: relaunch.sh
-  only:
-    - schedules

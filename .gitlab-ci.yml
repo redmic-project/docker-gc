@@ -1,9 +1,9 @@
 include:
   - project: 'redmic-project/gitlab-ci-templates'
-    ref: master
+    ref: ${GITLAB_CI_TEMPLATE_REF:-master}
     file: '/deployment.yml'
   - project: 'redmic-project/gitlab-ci-templates'
-    ref: master
+    ref: ${GITLAB_CI_TEMPLATE_REF:-master}
     file: '/maintenance.yml'
 
 stages:

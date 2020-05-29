@@ -21,22 +21,26 @@ services:
       mode: global
       restart_policy:
         condition: on-failure
-        delay: 1m
-        window: 10s
+        delay: ${RESTART_DELAY:-1m}
+      update_config:
+        delay: ${UPDATE_DELAY:-2m}
       resources:
         limits:
-          cpus: '0.1'
-          memory: 32M
+          cpus: '${RESOURCES_LIMITS_CPUS:-0.1}'
+          memory: ${RESOURCES_LIMITS_MEMORY:-32M}
         reservations:
-          memory: 16M
+          cpus: '${RESOURCES_RESERVATIONS_CPUS:-0.001}'
+          memory: ${RESOURCES_RESERVATIONS_MEMORY:-16M}
 
 volumes:
   docker-gc-vol:
-    name: "${DOCKER_GC_VOL_NAME:-docker-gc-vol}"
+    name: ${DOCKER_GC_VOL_NAME:-docker-gc-vol}
 
 configs:
   exclude-gc-image:
+    name: ${EXCLUDE_GC_IMAGE_NAME:-exclude-gc-image}
     file: ./config/exclude-gc-image.txt
 
   exclude-gc-container:
+    name: ${EXCLUDE_GC_CONTAINER_NAME:-exclude-gc-container}
     file: ./config/exclude-gc-container.txt

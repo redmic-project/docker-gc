@@ -11,6 +11,9 @@ stages:
   - maintenance
 
 variables:
-  STACK: maintenance
-  IMAGE_NAME: spotify/docker-gc
-  IMAGE_TAG: latest
+  PROJECT_PARENT_NAME: maintenance
+
+.deploy:
+  variables:
+    STACK: ${PROJECT_PARENT_NAME}
+    SERVICES_TO_CHECK: ${PROJECT_PARENT_NAME}_${CI_PROJECT_NAME}
